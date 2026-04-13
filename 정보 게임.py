@@ -23,7 +23,7 @@ hp = 10
 account_balance = 50000
 inventory = []
 quests = []
-current_time = "11시"
+주인공_상태 = "배고픔"
 settings_difficulty = "보통"
 settings_gate_visited = False
 
@@ -31,6 +31,8 @@ settings_gate_visited = False
 
 def 초기_설정():
     global settings_difficulty
+    print("송도 생활을 마치고 신촌에 처음 도착했다. 연대앞 버스정류장이다.")
+    print("배가 고프다. == 처음의 배고픈 상태는 HP=10이다.")
     while True:
         diff = 입력_받기_프롬프트("난이도를 선택하세요 (쉬움, 보통, 어려움): ")
         if diff == "쉬움" or diff == "보통" or diff == "어려움":
@@ -306,7 +308,6 @@ def 저장_작업():
         else:
             f.write("  ○ 임무: 비어있음\n")
             
-        f.write("● 현재 시각: " + current_time + "\n")
         f.write("● 난이도: " + settings_difficulty + "\n")
         
         입력_문자열 = ""
@@ -322,7 +323,7 @@ def 저장_작업():
     return None
 
 def 불러오기_작업():
-    global hp, account_balance, inventory, quests, row, col, current_time, settings_difficulty
+    global hp, account_balance, inventory, quests, row, col, settings_difficulty
     
     files = []
     for f in os.listdir('.'):
@@ -382,8 +383,6 @@ def 불러오기_작업():
                         if map_data[r][c] == loc:
                             row = r
                             col = c
-            elif "● 현재 시각:" in line:
-                current_time = line.replace("● 현재 시각:", "").strip()
             elif "● 난이도:" in line:
                 settings_difficulty = line.replace("● 난이도:", "").strip()
                 
